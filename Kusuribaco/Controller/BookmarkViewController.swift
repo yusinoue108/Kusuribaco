@@ -254,21 +254,108 @@ extension BookmarkViewController: UITableViewDelegate, UITableViewDataSource {
         
         // インジゲーターを表示する
         HUD.show(.progress)
-                
-        // リクエスト先のURLを更新する
-        let sgmlURLString = bookmark[indexPath.row].sgmlURL
+ 
+        let sgmlURL: URL = URL(string: bookmark[indexPath.row].sgmlURL)!
+        let sgmlURLString = self.bookmark[indexPath.row].sgmlURL
+        let drugNameString: String = self.bookmark[indexPath.row].drugName
         let pdfRequestData = PdfRequestData()
         pdfRequestData.url = sgmlURLString
+        
+        sgmlURL.isReachable { (success) in
 
-        // PDFのリンク先を取得して画面遷移する
+            // URLが有効だった場合
+            if success {
+                
+                // PDFへのリンクを取得して画面遷移する
+                self.moveNoteViewController(pdfRequestData: pdfRequestData, bookmark: self.bookmark, index: indexPath.row)
+                
+            } else {
+            // URLが無効だった場合
+                
+                // エンコーディングする
+                let urlEncoding = URLEncoding()
+                var encodedString: String = ""
+                for letter in drugNameString {
+                    encodedString = encodedString + urlEncoding.encoding(letter: String(letter))
+                }
+               
+                // 検索用語を更新する
+                let otcRequestData = OtcRequestData()
+                otcRequestData.searchText = encodedString
+                
+                // 検索結果を取得する
+                HTTPRequest.searchOtcDrug(postRequestData: otcRequestData) { (result) in
+                    
+                    // 医薬品名が完全一致するインデックスを取得
+                    let index = result.drugArray.firstIndex(of: drugNameString)
+                    if let index = index {
+                        
+                        // 完全一致のデータがあったら、DBを更新する
+                        let drugName: String = result.drugArray[index]
+                        let sgmlURL: String = result.URLArray[index]
+                        let kubun:String = result.kubunArray[index]
+                        let detail:String = result.detailArray[index]
+                        Bookmark.insert(drugName: drugName, sgmlURL: sgmlURL, kubun: kubun, detail: detail, medicalFlg: false)
+                        
+                        // PDFへのリンクを取得して画面遷移する
+                        self.moveNoteViewController(pdfRequestData: pdfRequestData, bookmark: self.bookmark, index: 0)
+                        
+                    } else {
+                    // 完全一致のデータがなかったら、
+                        
+                        // Bookmarkから削除する
+                        Bookmark.delete(drugName: drugNameString, sgmlURL: sgmlURLString)
+                        
+                        // Noteから削除する
+                        if Note.countByName(drugName: drugNameString) > 0 {
+                            Note.delete(drugName: drugNameString, tergetOld: false)
+                        }
+                        
+                        DispatchQueue.main.async {
+                            
+                            // seaechBarを初期化する
+                            self.searchBar.text = ""
+                            
+                            // 0件だったとき
+                            if self.bookmark.count == 0 {
+                                self.searchFlg = 1
+                            }
+                            
+                            // ソートの状態を初期化する
+                            self.selectedIndex = 0
+                            
+                            // ブックマークを全件取得する
+                            self.bookmark = Bookmark.selectAll()
+                            
+                            // セルを構築する
+                            self.tableView.reloadData()
+                            
+                            // インジケーターを終了する
+                            HUD.hide()
+                            
+                            // フロートを表示する
+                            let width = self.view.frame.size.width * 0.9
+                            let height = self.view.frame.size.height * 0.1
+                            float.show(message: "URLが無効であるため削除しました。", width: width, height: height)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    // PDFのリンク先を取得して画面遷移する
+    func moveNoteViewController(pdfRequestData: PdfRequestData, bookmark: Results<Bookmark>!, index: Int) {
+        
         HTTPRequest.getPdfURL(requestData: pdfRequestData, completion: { (result) in
             
             DispatchQueue.main.async {
                 
-                let drugNameString = self.bookmark[indexPath.row].drugName
-                let kubunString = self.bookmark[indexPath.row].kubun
-                let detailString = self.bookmark[indexPath.row].detail
+                let drugNameString = bookmark[index].drugName
+                let kubunString = bookmark[index].kubun
+                let detailString = self.bookmark[index].detail
                 let pdfURLString = result
+                let sgmlURLString = pdfRequestData.url
                 var noteString: String = ""
                 
                 if Note.countByName(drugName: drugNameString) > 0 {
@@ -293,7 +380,6 @@ extension BookmarkViewController: UITableViewDelegate, UITableViewDataSource {
             }
         })
     }
-    
 }
 
 // MARK: - UISearchBarDelegate
