@@ -1,0 +1,45 @@
+
+/* Class = "UIButton"; normalTitle = "編集/保存"; ObjectID = "1i9-Lj-1uE"; */
+"1i9-Lj-1uE.normalTitle" = "編集/保存";
+
+/* Class = "UINavigationItem"; title = "検索"; ObjectID = "Adf-WF-2bt"; */
+"Adf-WF-2bt.title" = "検索";
+
+/* Class = "UITextView"; text = "1日3回\n頭痛時"; ObjectID = "Dqu-HP-YN6"; */
+"Dqu-HP-YN6.text" = "1日3回\n頭痛時";
+
+/* Class = "UIButton"; normalTitle = "戻る"; ObjectID = "It5-tV-qzf"; */
+"It5-tV-qzf.normalTitle" = "戻る";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "LWA-a4-xL1"; */
+"LWA-a4-xL1.title" = "Item";
+
+/* Class = "UILabel"; text = "薬の名前が入る"; ObjectID = "THE-0g-vFx"; */
+"THE-0g-vFx.text" = "薬の名前が入る";
+
+/* Class = "UILabel"; text = "・医薬品区分：一般用医薬品\n・薬効分類：鎮痛・鎮痒・収れん・消炎薬\n・更新日：2020年08月26日"; ObjectID = "UL4-Qt-ZpT"; */
+"UL4-Qt-ZpT.text" = "・医薬品区分：一般用医薬品\n・薬効分類：鎮痛・鎮痒・収れん・消炎薬\n・更新日：2020年08月26日";
+
+/* Class = "UILabel"; text = "詳細"; ObjectID = "WnA-Gb-G2w"; */
+"WnA-Gb-G2w.text" = "詳細";
+
+/* Class = "UILabel"; text = "メモ"; ObjectID = "ZMl-SB-Urc"; */
+"ZMl-SB-Urc.text" = "メモ";
+
+/* Class = "UINavigationItem"; title = "ブックマーク"; ObjectID = "d4P-JY-bLp"; */
+"d4P-JY-bLp.title" = "ブックマーク";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "dp0-m7-soV"; */
+"dp0-m7-soV.title" = "Item";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "gDZ-Vp-wkj"; */
+"gDZ-Vp-wkj.title" = "Item";
+
+/* Class = "UILabel"; text = "要指導医薬品"; ObjectID = "lfc-Hq-KT1"; */
+"lfc-Hq-KT1.text" = "要指導医薬品";
+
+/* Class = "UIButton"; normalTitle = "保存"; ObjectID = "xPW-1b-zlI"; */
+"xPW-1b-zlI.normalTitle" = "保存";
+
+/* Class = "UILabel"; text = "区分"; ObjectID = "yg5-6C-Ipx"; */
+"yg5-6C-Ipx.text" = "区分";

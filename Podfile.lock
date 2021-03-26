@@ -1,0 +1,58 @@
+PODS:
+  - DropDown (2.3.13)
+  - DZNEmptyDataSet (1.8.1)
+  - Kanna (5.2.4)
+  - PKHUD (5.3.0)
+  - QuickLayout (3.0.0)
+  - ReachabilitySwift (5.0.0)
+  - Realm (10.5.1):
+    - Realm/Headers (= 10.5.1)
+  - Realm/Headers (10.5.1)
+  - RealmSwift (10.5.1):
+    - Realm (= 10.5.1)
+  - SwiftEntryKit (1.2.7):
+    - QuickLayout (= 3.0.0)
+  - "UITextView+Placeholder (1.4.0)"
+  - XLPagerTabStrip (9.0.0)
+
+DEPENDENCIES:
+  - DropDown
+  - DZNEmptyDataSet
+  - Kanna
+  - PKHUD
+  - ReachabilitySwift
+  - RealmSwift
+  - SwiftEntryKit
+  - "UITextView+Placeholder"
+  - XLPagerTabStrip
+
+SPEC REPOS:
+  trunk:
+    - DropDown
+    - DZNEmptyDataSet
+    - Kanna
+    - PKHUD
+    - QuickLayout
+    - ReachabilitySwift
+    - Realm
+    - RealmSwift
+    - SwiftEntryKit
+    - "UITextView+Placeholder"
+    - XLPagerTabStrip
+
+SPEC CHECKSUMS:
+  DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
+  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
+  Kanna: b9d00d7c11428308c7f95e1f1f84b8205f567a8f
+  PKHUD: 98f3e4bc904b9c916f1c5bb6d765365b5357291b
+  QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
+  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+  Realm: 77fcb4e0b9f2963ea06f584749a0d7dc9cab95e1
+  RealmSwift: 6abe6aa6cd8b70cc1a87afcb9232cabea74ff1ac
+  SwiftEntryKit: 537c92699d6034efb1ef9c32b11e0b37c97aa589
+  "UITextView+Placeholder": d7b0c400921f66523f3a85d74f774512e14f6502
+  XLPagerTabStrip: 61c57fd61f611ee5f01ff1495ad6fbee8bf496c5
+
+PODFILE CHECKSUM: 5ecbb7c07753338cbc2116243dbfefa2c7792382
+
+COCOAPODS: 1.10.0
