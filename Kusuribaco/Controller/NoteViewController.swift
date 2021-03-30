@@ -22,6 +22,7 @@ class NoteViewController: UIViewController {
     @IBOutlet weak var horizontalScrollView: UIScrollView!
     @IBOutlet weak var horizontalContainerSubView: UIView!
     @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var kubunImage: UIImageView!
     
     var drugNameString: String = ""
     var kubunString: String = ""
@@ -29,6 +30,7 @@ class NoteViewController: UIViewController {
     var noteString: String = ""
     var sgmlURLString: String = ""
     var pdfURLString: String = ""
+    var medicalFlg: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +46,13 @@ class NoteViewController: UIViewController {
         
         // 区分ラベル
         kubunLabel.setTextAndKaigyo(text: kubunString,fontSize: 22.0, boldFont: false, allowKaigyo: true)
+        
+        // 区分画像
+        if medicalFlg {
+            kubunImage.image = UIImage(named: "KubunIcon1")
+        } else {
+            kubunImage.image = UIImage(named: "KubunIcon2")
+        }
         
         // 詳細ラベル
         detailLabel.setTextAndKaigyo(text: String(detailString.dropLast()),fontSize: 22.0, boldFont: false, allowKaigyo: true)

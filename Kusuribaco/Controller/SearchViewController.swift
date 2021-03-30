@@ -10,7 +10,12 @@ import PKHUD
 import Reachability
 import DZNEmptyDataSet
 
-class OtcSearchViewController: UIViewController {
+enum searchKubun {
+    case medical
+    case otc
+}
+
+class SearchViewController: UIViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -18,6 +23,7 @@ class OtcSearchViewController: UIViewController {
     var resultData = ResultData()
     let reachability = try! Reachability()
     var searchFlg = Int()
+    var searchKubun: searchKubun?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +32,11 @@ class OtcSearchViewController: UIViewController {
         view.backgroundColor = .myGray()
 
         // Titleの設定
-        self.navigationItem.title = "市販薬の検索"
+        switch searchKubun {
+        case .medical: self.navigationItem.title = "医療用医薬品の検索"
+        case .otc: self.navigationItem.title = "一般用医薬品の検索"
+        case .none: self.navigationItem.title = ""
+        }
         self.navigationController?.navigationBar.barTintColor = .systemTeal
         self.navigationController?.navigationBar.tintColor = .white
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
@@ -73,10 +83,22 @@ class OtcSearchViewController: UIViewController {
             
             // ブックマークフラグを振り直す
             let drugName = resultData.drugArray[index]
-            if Bookmark.selectByName(drugName: drugName).count > 0 {
-                resultData.bookmarkArray[index] = "1"
-            } else {
-                resultData.bookmarkArray[index] = "0"
+            
+            switch searchKubun {
+            case .medical:
+                if Bookmark.selectByName(drugName: drugName, medicalFlg: true).count > 0 {
+                    resultData.bookmarkArray[index] = "1"
+                } else {
+                    resultData.bookmarkArray[index] = "0"
+                }
+            case .otc:
+                if Bookmark.selectByName(drugName: drugName, medicalFlg: false).count > 0 {
+                    resultData.bookmarkArray[index] = "1"
+                } else {
+                    resultData.bookmarkArray[index] = "0"
+                }
+            case .none:
+                return
             }
             
             // 再読み込みする
@@ -98,7 +120,7 @@ class OtcSearchViewController: UIViewController {
 
 // MARK: - UISearchBarDelegate
 
-extension OtcSearchViewController: UISearchBarDelegate {
+extension SearchViewController: UISearchBarDelegate {
     
     // 検索ボタンをクリックした時
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -122,43 +144,85 @@ extension OtcSearchViewController: UISearchBarDelegate {
             return
         }
         
-        // 検索用語をURLエンコーディングする
+        // 検索ワード
         drugNameString = searchBar.text!
-        for letter in drugNameString {
-            encodedString = encodedString + urlEncoding.encoding(letter: String(letter))
-        }
-       
-        // 検索用語を更新する
-        let otcRequestData = OtcRequestData()
-        otcRequestData.searchText = encodedString
         
-        // 検索結果を取得する
-        HTTPRequest.searchOtcDrug(postRequestData: otcRequestData) { (result) in
+        // 検索結果を取得し、セルを構築していく
+        switch searchKubun {
+        // 処方薬検索の場合
+        case .medical:
             
-            self.resultData = result
+            // 検索用語をURLエンコーディングする
+            encodedString = urlEncoding.utf8PercentEncoding(URLString: drugNameString)
             
-            // 検索結果の件数を確認する
-            if self.resultData.drugArray.count == 0 {
-                self.tableView.separatorStyle = .none
-                self.searchFlg = 3
+            // 検索用語を更新する
+            let medicalRequestData = MedicalRequestData()
+            medicalRequestData.searchText = encodedString
+            
+            // 検索結果を取得する
+            HTTPRequest.searchMedicalDrug(postRequestData: medicalRequestData) { (result) in
+                
+                self.resultData = result
+                
+                // 検索結果の件数を確認する
+                if self.resultData.drugArray.count == 0 {
+                    self.tableView.separatorStyle = .none
+                    self.searchFlg = 3
+                }
+                
+                DispatchQueue.main.async {
+                    // セルを構築していく
+                    self.tableView.reloadData()
+                    // インジケーターを終了する
+                    HUD.hide()
+                    // キーボードを閉じる
+                    self.searchBar.resignFirstResponder()
+                }
+            }
+            return
+        // 市販薬検索の場合
+        case .otc:
+            
+            // 検索用語をURLエンコーディングする
+            for letter in drugNameString {
+                encodedString = encodedString + urlEncoding.eucjpPercentEncoding(letter: String(letter))
             }
             
-            DispatchQueue.main.async {
-                // セルを構築していく
-                self.tableView.reloadData()
-                // インジケーターを終了する
-                HUD.hide()
-                // キーボードを閉じる
-                self.searchBar.resignFirstResponder()
+            // 検索用語を更新する
+            let otcRequestData = OtcRequestData()
+            otcRequestData.searchText = encodedString
+            
+            // 検索結果を取得する
+            HTTPRequest.searchOtcDrug(postRequestData: otcRequestData) { (result) in
+                
+                self.resultData = result
+                
+                // 検索結果の件数を確認する
+                if self.resultData.drugArray.count == 0 {
+                    self.tableView.separatorStyle = .none
+                    self.searchFlg = 3
+                }
+                
+                DispatchQueue.main.async {
+                    // セルを構築していく
+                    self.tableView.reloadData()
+                    // インジケーターを終了する
+                    HUD.hide()
+                    // キーボードを閉じる
+                    self.searchBar.resignFirstResponder()
+                }
             }
+            return
+            
+        case .none:
+            return
         }
-        return
     }
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
 
-extension OtcSearchViewController: UITableViewDelegate, UITableViewDataSource {
+extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     // セルがタップされた時
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -180,9 +244,9 @@ extension OtcSearchViewController: UITableViewDelegate, UITableViewDataSource {
         // リクエスト先のURLを更新する
         let pdfRequestData = PdfRequestData()
         pdfRequestData.url = resultData.URLArray[indexPath.row]
-
+        
         // PDFのリンク先を取得して画面遷移する
-        HTTPRequest.getPdfURL(requestData: pdfRequestData, completion: { (result) in
+        HTTPRequest.getPdfURL(requestData: pdfRequestData, kubun: searchKubun!, completion: { (result) in
 
             let drugNameString = self.resultData.drugArray[indexPath.row]
             let kubunString = self.resultData.kubunArray[indexPath.row]
@@ -255,7 +319,17 @@ extension OtcSearchViewController: UITableViewDelegate, UITableViewDataSource {
             // ブックマークに追加
             sender.tintColor = .systemYellow
             resultData.bookmarkArray[row] = "1"
-            Bookmark.insert(drugName: drugName, sgmlURL: sgmlURL, kubun: kubun, detail: detail, medicalFlg: false) 
+            
+            switch searchKubun {
+            case .medical:
+                Bookmark.insert(drugName: drugName, sgmlURL: sgmlURL, kubun: kubun, detail: detail, medicalFlg: true)
+            case .otc:
+                Bookmark.insert(drugName: drugName, sgmlURL: sgmlURL, kubun: kubun, detail: detail, medicalFlg: false)
+            case .none:
+                HUD.hide()
+                return
+            }
+            
             HUD.flash(.labeledSuccess(title: "", subtitle: "保存しました"), delay: 0.5)
         }
     }
@@ -276,7 +350,7 @@ extension OtcSearchViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 // MARK: -  DZNEmptyDataSetSource, DZNEmptyDataSetDelegate
-extension OtcSearchViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+extension SearchViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
     func emptyDataSetWillAppear(_ scrollView: UIScrollView!) {
         scrollView.bounds.origin.y = 0
@@ -291,10 +365,15 @@ extension OtcSearchViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegat
         
         var titleString = String()
         switch searchFlg {
-        case 1: titleString = "市販薬を検索します"
+        case 1:
+            switch searchKubun {
+            case .medical: titleString = "医療用医薬品を検索する"
+            case .otc: titleString = "一般用医薬品を検索する"
+            case .none: titleString = ""
+            }
         case 2: titleString = "インターネット接続がありません"
-        case 3: titleString = "検索結果は0件でした"
-        default: titleString = "市販薬を検索します"
+        case 3: titleString = "検索結果が0件あるいは1000件以上でした"
+        default: titleString = ""
         }
         
         let stringAttributes: [NSAttributedString.Key : Any] = [
@@ -310,9 +389,14 @@ extension OtcSearchViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegat
 
         var descriptionString = String()
         switch searchFlg {
-        case 1: descriptionString = ""
+        case 1:
+            switch searchKubun {
+            case .medical: descriptionString = "病院やクリニックで処方される\n薬を検索します"
+            case .otc: descriptionString = "薬局やドラッグストアで買える\n薬を検索します"
+            case .none: descriptionString = ""
+            }
         case 2: descriptionString = "良好な通信環境でもう一度お試しください"
-        case 3: descriptionString = "検索ワードを変えてもう一度お試しください\n(例) \"ろきそにん\" → \"ロキソニン\""
+        case 3: descriptionString = "検索ワードを変えてもう一度お試しください\n(例1) \"ろきそにん\" → \"ロキソニン\"\n(例2) \"ロ\" → \"ロキソ\""
         default: descriptionString = ""
         }
 

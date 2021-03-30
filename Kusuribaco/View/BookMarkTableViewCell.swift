@@ -14,6 +14,7 @@ class BookMarkTableViewCell: UITableViewCell {
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var addDateLabel: UILabel!
     @IBOutlet weak var mainView: UIView!
+    @IBOutlet weak var kubunImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -53,7 +54,19 @@ class BookMarkTableViewCell: UITableViewCell {
         addDateLabel.text  = "追加日：\(date)"
         
         // 販売会社
-        detailLabel.text = String(bookmark[index].detail.components(separatedBy: "医薬品区分")[0].dropLast())
+        let detailString: String = bookmark[index].detail
+        if detailString.contains("\n医薬品区分") {
+            detailLabel.text = detailString.components(separatedBy: "\n医薬品区分")[0]
+        } else {
+            detailLabel.text = detailString
+        }
+        
+        // 医薬品区分画像
+        if bookmark[index].medicalFlg {
+            kubunImage.image = UIImage(named: "KubunIcon1")
+        } else {
+            kubunImage.image = UIImage(named: "KubunIcon2")
+        }
         
     }
     

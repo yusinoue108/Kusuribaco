@@ -2387,8 +2387,8 @@ class URLEncoding {
         "錮" : "%EE%FE"
     ]
     
-    // URLエンコードをする
-    func encoding(letter: String) -> String {
+    // URLエンコードをする(eucjp)
+    func eucjpPercentEncoding(letter: String) -> String {
         
         // エンコード後の文字列
         var percentLetter: String = ""
@@ -2413,5 +2413,12 @@ class URLEncoding {
         }
 
         return percentLetter
+    }
+    
+    // URLエンコードをする(utf8)
+    func utf8PercentEncoding(URLString: String) -> String {
+        
+        let allowedCharacters = NSCharacterSet.alphanumerics.union(.init(charactersIn: "-._~"))
+        return URLString.addingPercentEncoding(withAllowedCharacters: allowedCharacters)!
     }
 }

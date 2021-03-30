@@ -68,11 +68,11 @@ extension Bookmark {
         return select
     }
     
-    // レコード抽出(キー：医薬品名)
+    // レコード抽出(キー：医薬品名、処方薬フラグ)
     // SELECT * FROM Bookmark
-    // WHERE drugName = /(drugName)
+    // WHERE drugName = /(drugName) AND medicalFlg = medicalFlg
     // ORDER BY addDate DESC
-    class func selectByName(drugName: String) -> Results<Bookmark> {
+    class func selectByName(drugName: String, medicalFlg: Bool) -> Results<Bookmark> {
         
         // 囲い文字のエスケープ
         var escapedString = drugName
@@ -81,7 +81,7 @@ extension Bookmark {
         
         // 抽出する
         let realm = try! Realm()
-        let select = realm.objects(Bookmark.self).filter("drugName = '\(escapedString)'").sorted(byKeyPath: "addDate", ascending: false)
+        let select = realm.objects(Bookmark.self).filter("drugName = '\(escapedString)' AND medicalFlg = \(medicalFlg)").sorted(byKeyPath: "addDate", ascending: false)
         return select
     }
     

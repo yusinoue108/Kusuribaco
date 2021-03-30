@@ -15,7 +15,7 @@
 		7059A52E25BD126A00ABF196 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7059A52C25BD126A00ABF196 /* Main.storyboard */; };
 		7059A53025BD126E00ABF196 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7059A52F25BD126E00ABF196 /* Assets.xcassets */; };
 		7059A53325BD126E00ABF196 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7059A53125BD126E00ABF196 /* LaunchScreen.storyboard */; };
-		7059A54725BD181600ABF196 /* OtcSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7059A54625BD181600ABF196 /* OtcSearchViewController.swift */; };
+		7059A54725BD181600ABF196 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7059A54625BD181600ABF196 /* SearchViewController.swift */; };
 		7059A54A25BD183500ABF196 /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7059A54925BD183500ABF196 /* BookmarkViewController.swift */; };
 		7059A54E25BD189100ABF196 /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7059A54D25BD189100ABF196 /* PDFViewController.swift */; };
 		7059A55125BD18B200ABF196 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7059A55025BD18B200ABF196 /* DetailViewController.swift */; };
@@ -29,6 +29,7 @@
 		70884D1225E4B48A005A3E08 /* NoteEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70884D1125E4B48A005A3E08 /* NoteEditViewController.swift */; };
 		70A5158B25C313750045C0A3 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A5158A25C313750045C0A3 /* ShadowView.swift */; };
 		70AB522825BD7E0B001C28D3 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AB522725BD7E0B001C28D3 /* MainTabBarController.swift */; };
+		70B2ABD1260F40C700DDB603 /* SearchMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B2ABD0260F40C700DDB603 /* SearchMenuViewController.swift */; };
 		70E14C2525BDCA70008C4EE3 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E14C2325BDCA70008C4EE3 /* SearchTableViewCell.swift */; };
 		70E14C2625BDCA70008C4EE3 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70E14C2425BDCA70008C4EE3 /* SearchTableViewCell.xib */; };
 		70EDA93725C994D6008D67FD /* FloatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EDA93625C994D6008D67FD /* FloatModel.swift */; };
@@ -49,7 +50,7 @@
 		7059A52F25BD126E00ABF196 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7059A53225BD126E00ABF196 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7059A53425BD126E00ABF196 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7059A54625BD181600ABF196 /* OtcSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtcSearchViewController.swift; sourceTree = "<group>"; };
+		7059A54625BD181600ABF196 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		7059A54925BD183500ABF196 /* BookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
 		7059A54D25BD189100ABF196 /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
 		7059A55025BD18B200ABF196 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -65,6 +66,7 @@
 		70884D1125E4B48A005A3E08 /* NoteEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditViewController.swift; sourceTree = "<group>"; };
 		70A5158A25C313750045C0A3 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		70AB522725BD7E0B001C28D3 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		70B2ABD0260F40C700DDB603 /* SearchMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMenuViewController.swift; sourceTree = "<group>"; };
 		70E14C2325BDCA70008C4EE3 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		70E14C2425BDCA70008C4EE3 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
 		70EDA93625C994D6008D67FD /* FloatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatModel.swift; sourceTree = "<group>"; };
@@ -149,13 +151,14 @@
 			isa = PBXGroup;
 			children = (
 				70AB522725BD7E0B001C28D3 /* MainTabBarController.swift */,
-				7059A54625BD181600ABF196 /* OtcSearchViewController.swift */,
+				7059A54625BD181600ABF196 /* SearchViewController.swift */,
 				7059A55025BD18B200ABF196 /* DetailViewController.swift */,
 				7059A54D25BD189100ABF196 /* PDFViewController.swift */,
 				7059A55325BD18C700ABF196 /* SGMLViewController.swift */,
 				7059A54925BD183500ABF196 /* BookmarkViewController.swift */,
 				7059A55725BD18DE00ABF196 /* NoteViewController.swift */,
 				70884D1125E4B48A005A3E08 /* NoteEditViewController.swift */,
+				70B2ABD0260F40C700DDB603 /* SearchMenuViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -302,13 +305,14 @@
 				702A44B525D5831000BD4D9F /* BookMarkTableViewCell.swift in Sources */,
 				70214CAC25DADA760049F61D /* Extentions.swift in Sources */,
 				7059A52725BD126A00ABF196 /* AppDelegate.swift in Sources */,
-				7059A54725BD181600ABF196 /* OtcSearchViewController.swift in Sources */,
+				7059A54725BD181600ABF196 /* SearchViewController.swift in Sources */,
 				7059A55125BD18B200ABF196 /* DetailViewController.swift in Sources */,
 				7059A52925BD126A00ABF196 /* SceneDelegate.swift in Sources */,
 				706BDCA625F39F9A00435398 /* RequestDataModel.swift in Sources */,
 				7059A55E25BD19A600ABF196 /* EncodingModel.swift in Sources */,
 				70EDA93A25C99DD3008D67FD /* NetworkModel.swift in Sources */,
 				70A5158B25C313750045C0A3 /* ShadowView.swift in Sources */,
+				70B2ABD1260F40C700DDB603 /* SearchMenuViewController.swift in Sources */,
 				7059A55B25BD195200ABF196 /* HTTPRequestModel.swift in Sources */,
 				7059A55425BD18C700ABF196 /* SGMLViewController.swift in Sources */,
 				7059A54A25BD183500ABF196 /* BookmarkViewController.swift in Sources */,

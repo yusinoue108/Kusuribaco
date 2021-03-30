@@ -313,6 +313,7 @@
                         <outlet property="editButton" destination="vKu-Ou-dLD" id="xdh-dI-XLT"/>
                         <outlet property="horizontalContainerSubView" destination="7ji-hd-9OZ" id="8aa-Up-25e"/>
                         <outlet property="horizontalScrollView" destination="YjD-cs-Hxc" id="LoI-Wk-Urd"/>
+                        <outlet property="kubunImage" destination="Btt-fk-vGH" id="txg-OV-UAk"/>
                         <outlet property="kubunLabel" destination="lfc-Hq-KT1" id="Eso-1W-DEy"/>
                         <outlet property="noteTextView" destination="Dqu-HP-YN6" id="229-uF-xxv"/>
                         <outlet property="pdfView" destination="ms6-vL-WY1" id="tmi-aH-AZH"/>
@@ -407,7 +408,7 @@
         <!--検索-->
         <scene sceneID="g3P-Tl-niq">
             <objects>
-                <viewController storyboardIdentifier="OtcSearchVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="g3h-1d-pTL" customClass="OtcSearchViewController" customModule="Kusuribaco" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="g3h-1d-pTL" customClass="SearchViewController" customModule="Kusuribaco" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eOy-4d-VEA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="574"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -581,6 +582,67 @@
             </objects>
             <point key="canvasLocation" x="2" y="36"/>
         </scene>
+        <!--Search Menu View Controller-->
+        <scene sceneID="GWu-pe-iQP">
+            <objects>
+                <viewController storyboardIdentifier="SearchMenuVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6OF-2h-hVF" customClass="SearchMenuViewController" customModule="Kusuribaco" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xCj-7Y-IPz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="574"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a7S-7o-qRf" userLabel="Medical Search Button">
+                                <rect key="frame" x="25" y="117" width="325" height="140"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="a7S-7o-qRf" secondAttribute="height" multiplier="65:28" id="6ye-vl-eO9"/>
+                                    <constraint firstAttribute="width" priority="990" constant="325" id="I0S-L0-cpT"/>
+                                    <constraint firstAttribute="height" priority="990" constant="140" id="RYe-2t-2l1"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="MedicalSearchIcon"/>
+                                <connections>
+                                    <action selector="moveMedicalSearchVC:" destination="6OF-2h-hVF" eventType="touchUpInside" id="SkF-Yv-cSf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U9K-SF-Mmd" userLabel="Otc Search Button">
+                                <rect key="frame" x="25" y="317" width="325" height="140"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="U9K-SF-Mmd" secondAttribute="height" multiplier="65:28" id="G2n-SB-xqL"/>
+                                    <constraint firstAttribute="width" priority="990" constant="325" id="R6b-rS-781"/>
+                                    <constraint firstAttribute="height" priority="990" constant="140" id="rmA-ky-gRh"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="OtcSearchIcon"/>
+                                <connections>
+                                    <action selector="moveOtcSearchVC:" destination="6OF-2h-hVF" eventType="touchUpInside" id="2vu-Ut-ojh"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="GkN-ws-4ax"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="a7S-7o-qRf" firstAttribute="centerX" secondItem="xCj-7Y-IPz" secondAttribute="centerX" id="002-dg-rPZ"/>
+                            <constraint firstItem="a7S-7o-qRf" firstAttribute="leading" secondItem="GkN-ws-4ax" secondAttribute="leading" constant="25" id="9MC-mA-bNQ"/>
+                            <constraint firstItem="U9K-SF-Mmd" firstAttribute="centerY" secondItem="xCj-7Y-IPz" secondAttribute="centerY" constant="100" id="C5a-3g-tKJ"/>
+                            <constraint firstItem="U9K-SF-Mmd" firstAttribute="leading" secondItem="GkN-ws-4ax" secondAttribute="leading" constant="25" id="Pzi-75-Dcp"/>
+                            <constraint firstItem="GkN-ws-4ax" firstAttribute="trailing" secondItem="a7S-7o-qRf" secondAttribute="trailing" constant="25" id="dId-2C-z5Q"/>
+                            <constraint firstItem="U9K-SF-Mmd" firstAttribute="centerX" secondItem="xCj-7Y-IPz" secondAttribute="centerX" id="jcL-aC-aKm"/>
+                            <constraint firstItem="GkN-ws-4ax" firstAttribute="trailing" secondItem="U9K-SF-Mmd" secondAttribute="trailing" constant="25" id="mPm-mh-XI3"/>
+                            <constraint firstItem="a7S-7o-qRf" firstAttribute="centerY" secondItem="xCj-7Y-IPz" secondAttribute="centerY" constant="-100" id="vAf-J5-yBe"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Xe1-xu-w2I"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
+                    <connections>
+                        <outlet property="OtcSearchButton" destination="U9K-SF-Mmd" id="QPd-De-fEt"/>
+                        <outlet property="medicalSearchButton" destination="a7S-7o-qRf" id="4dy-DM-XIQ"/>
+                        <segue destination="g3h-1d-pTL" kind="show" id="0f7-z9-BbS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O0Z-C5-dOa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2088.8000000000002" y="-1121.2893553223389"/>
+        </scene>
         <!--Item-->
         <scene sceneID="kv7-T9-6Zz">
             <objects>
@@ -594,7 +656,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="g3h-1d-pTL" kind="relationship" relationship="rootViewController" id="2Vc-Vz-frn"/>
+                        <segue destination="6OF-2h-hVF" kind="relationship" relationship="rootViewController" id="qZ0-H3-87d"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E4B-TT-oig" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -637,7 +699,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="KubunIcon1" width="371" height="155"/>
+        <image name="KubunIcon1" width="123.66666412353516" height="51.666667938232422"/>
+        <image name="MedicalSearchIcon" width="774" height="313"/>
+        <image name="OtcSearchIcon" width="774" height="313"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
