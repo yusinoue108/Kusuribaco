@@ -14,14 +14,13 @@ class MainTabBarController: UITabBarController {
         
         var viewControllers: [UIViewController] = []
         
-        let otcSearchVC = storyboard?.instantiateViewController(withIdentifier: "OtcSearchVC") as! OtcSearchViewController
+        let searchMenuVC = storyboard?.instantiateViewController(withIdentifier: "SearchMenuVC") as! SearchMenuViewController
         let bookmarkVC = storyboard?.instantiateViewController(withIdentifier: "BookMarkVC") as! BookmarkViewController
-
         
-        otcSearchVC.tabBarItem.title = "検索"
+        searchMenuVC.tabBarItem.title = "検索"
         let searchImage: UIImage = (UIImage(named: "SearchIcon")?.resized(width: 30))!
-        otcSearchVC.tabBarItem.image = searchImage
-        viewControllers.append(otcSearchVC)
+        searchMenuVC.tabBarItem.image = searchImage
+        viewControllers.append(searchMenuVC)
         
         bookmarkVC.tabBarItem.title = "ブックマーク"
         let bookmarkImage: UIImage = (UIImage(named: "BookmarkIcon")?.resized(width: 30))!

@@ -56,8 +56,13 @@ class SearchTableViewCell: UITableViewCell {
         drugNameLabel.text = resultData.drugArray[index]
         
         // 販売会社
-        detailLabel.text = String(resultData.detailArray[index].components(separatedBy: "医薬品区分")[0].dropLast())
-
+        let detailString: String = resultData.detailArray[index]
+        if detailString.contains("\n医薬品区分") {
+            detailLabel.text = detailString.components(separatedBy: "\n医薬品区分")[0]
+        } else {
+            detailLabel.text = detailString
+        }
+        
         // ブックマークの状態設定
         if resultData.bookmarkArray[index] == "1" {
             bookmarkButton.tintColor = .systemYellow

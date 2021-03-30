@@ -41,7 +41,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="KubunIcon1" translatesAutoresizingMaskIntoConstraints="NO" id="b4a-Ae-173" userLabel="KubunIcon">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="b4a-Ae-173" userLabel="KubunIcon">
                                         <rect key="frame" x="265" y="5" width="90" height="35"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -96,13 +96,13 @@
                 <outlet property="addDateLabel" destination="Eny-Nk-0fV" id="FWB-Gm-yG1"/>
                 <outlet property="detailLabel" destination="53s-fP-ddf" id="BqY-jj-fCU"/>
                 <outlet property="drugNameLabel" destination="kUC-dJ-V0I" id="mTv-9Y-pxF"/>
+                <outlet property="kubunImage" destination="b4a-Ae-173" id="Kf3-Ne-4vz"/>
                 <outlet property="mainView" destination="ZCh-ex-vOP" id="28y-cZ-8ou"/>
             </connections>
             <point key="canvasLocation" x="-1591" y="-416"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="KubunIcon1" width="371" height="155"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
