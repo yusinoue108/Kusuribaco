@@ -355,9 +355,7 @@ extension BookmarkViewController: UITableViewDelegate, UITableViewDataSource {
                     // エンコーディングする
                     let urlEncoding = URLEncoding()
                     var encodedString: String = ""
-                    for letter in drugNameString {
-                        encodedString = encodedString + urlEncoding.eucjpPercentEncoding(letter: String(letter))
-                    }
+                    encodedString = urlEncoding.eucjpPercentEncoding(URLString: drugNameString)
                    
                     // 検索用語を更新する
                     let otcRequestData = OtcRequestData()
